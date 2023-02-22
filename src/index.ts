@@ -57,13 +57,14 @@ export function drawSine(wave: SineWave, canvas: Canvas, t = 0) {
 }
 
 export function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: number, path: string) {
-	if (!fs.statSync(path).isDirectory()) fs.mkdirSync(path);
+	if (!fs.existsSync(path) || !fs.statSync(path).isDirectory()) fs.mkdirSync(path);
 	if (!path.endsWith("/")) path += "/";
 
 	const duration = waves.map(x => x.period).reduce((a, b) => lcm(a, b));
 	const advance = 1 / fps;
 	for (let ii = 0; ii < duration * fps; ii++) {
-		var copy = canvas;
+		var copy = new Canvas(canvas.width, canvas.height, "image");
+		copy.getContext("2d").drawImage(canvas, 0, 0);
 		for (const wave of waves) {
 			copy = drawSine(wave, copy, advance * ii);
 		}
@@ -76,7 +77,8 @@ export function animateSines(waves: SineWave[], canvas: Canvas, fps: number) {
 	const advance = 1 / fps;
 	const frames: ArrayBuffer[] = [];
 	for (let ii = 0; ii < duration * fps; ii++) {
-		var copy = canvas;
+		var copy = new Canvas(canvas.width, canvas.height, "image");
+		copy.getContext("2d").drawImage(canvas, 0, 0);
 		for (const wave of waves) {
 			copy = drawSine(wave, copy, advance * ii);
 		}
