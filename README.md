@@ -14,8 +14,8 @@ The functions and classes are defined as follows:
 ```ts
 // Generates an animation of sine wave(s) moving. Returns the buffer of an APNG file. Save it as PNG my friend.
 function animateSines(waves: SineWave[], canvas: Canvas, fps: number): ArrayBuffer
-// Generates frames for the animation and saves them in <path> as PNGs.
-function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: number, path: string): void
+// Generates frames for the animation and saves them in <path> as PNGs. Returns the number of PNGs generated.
+function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: number, path: string): number
 // Draws a sine wave onto the canvas. Returns the drawn canvas.
 function drawSine(wave: SineWave, canvas: Canvas, t = 0): Canvas
 ```

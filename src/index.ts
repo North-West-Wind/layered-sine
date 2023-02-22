@@ -69,8 +69,9 @@ export function drawSine(wave: SineWave, canvas: Canvas, t = 0): Canvas {
  * @param canvas Background canvas.
  * @param fps Framerate of animation.
  * @param path Path to store the frames.
+ * @returns {number} Number of PNGs generated.
  */
-export function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: number, path: string): void {
+export function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: number, path: string): number {
 	if (!fs.existsSync(path) || !fs.statSync(path).isDirectory()) fs.mkdirSync(path);
 	if (!path.endsWith("/")) path += "/";
 
@@ -84,6 +85,8 @@ export function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: numbe
 		}
 		fs.writeFileSync(path + `frame-${ii}.png`, copy.toBuffer());
 	}
+
+	return duration * fps;
 }
 
 /**
