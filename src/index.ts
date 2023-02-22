@@ -37,7 +37,14 @@ export class SineWave {
 	}
 }
 
-export function drawSine(wave: SineWave, canvas: Canvas, t = 0) {
+/**
+ * Draws a sine wave onto the canvas.
+ * @param wave The sine wave to draw.
+ * @param canvas The canvas to fill.
+ * @param t Time. Also determines phase of wave.
+ * @returns {Canvas} Canvas with sine wave drawn.
+ */
+export function drawSine(wave: SineWave, canvas: Canvas, t = 0): Canvas {
 	const ctx = canvas.getContext("2d");
 	ctx.fillStyle = colorString(wave.color);
 	switch (wave.fill) {
@@ -56,7 +63,14 @@ export function drawSine(wave: SineWave, canvas: Canvas, t = 0) {
 	return canvas;
 }
 
-export function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: number, path: string) {
+/**
+ * Generates frames for the animation and saves them in <path> as PNGs.
+ * @param waves Sine wave(s) to draw.
+ * @param canvas Background canvas.
+ * @param fps Framerate of animation.
+ * @param path Path to store the frames.
+ */
+export function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: number, path: string): void {
 	if (!fs.existsSync(path) || !fs.statSync(path).isDirectory()) fs.mkdirSync(path);
 	if (!path.endsWith("/")) path += "/";
 
@@ -72,7 +86,14 @@ export function animateSinesFrames(waves: SineWave[], canvas: Canvas, fps: numbe
 	}
 }
 
-export function animateSines(waves: SineWave[], canvas: Canvas, fps: number) {
+/**
+ * Generates an animation of sine wave(s) moving.
+ * @param waves Sine wave(s) to draw.
+ * @param canvas Background canvas.
+ * @param fps Framerate of animation.
+ * @returns {ArrayBuffer} Buffer of animation (APNG format).
+ */
+export function animateSines(waves: SineWave[], canvas: Canvas, fps: number): ArrayBuffer {
 	const duration = waves.map(x => x.period).reduce((a, b) => lcm(a, b));
 	const advance = 1 / fps;
 	const frames: ArrayBuffer[] = [];

@@ -1,7 +1,7 @@
 {
   "name": "layered-sine",
   "version": "1.0.0",
-  "description": "Fills a canvas with sine wave(s).",
+  "description": "Fills a canvas with sine wave(s), and generates animation.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
