@@ -44,8 +44,8 @@ export class SineWave {
  * @param t Time. Also determines phase of wave.
  * @returns {Canvas} Canvas with sine wave drawn.
  */
-export function drawSine(wave: SineWave, canvas: Canvas, t = 0): Canvas {
-	const ctx = canvas.getContext("2d");
+export function drawSine<T extends Canvas | HTMLCanvasElement>(wave: SineWave, canvas: T, t = 0): T {
+	const ctx = <CanvasRenderingContext2D> canvas.getContext("2d");
 	ctx.fillStyle = colorString(wave.color);
 	switch (wave.fill) {
 		case FillMode.UP:
